@@ -74,17 +74,17 @@ class MGlobal(object):
     
     @classmethod
     def bnn_getFunctionSetFromType(cls, type):
-        """Retrieve the function set class from a type.
+        """Retrieve the function set from a given type.
         
         Parameters
         ----------
         type : maya.OpenMaya.MFn.Type
-            Type of the dunction set to look for.
+            Type of the function set to look for.
         
         Returns
         -------
-        class
-            The function set class found, None otherwise.
+        class inheriting from maya.OpenMaya.MFnBase
+            The function set found, None otherwise.
         
         Examples
         --------
@@ -99,6 +99,12 @@ class MGlobal(object):
         >>> type = dagPath.apiType()
         >>> cls = OpenMaya.MGlobal.bnn_getFunctionSetFromType(type)
         >>> transform = cls(dagPath)
+        
+        Note
+        ----
+            Use the `~maya.OpenMaya.MObject.getFunctionSet()` method whenever
+            possible to also try to deduce the function set if the
+            correspondance with its type is not yet known.
         """
         return banana.maya._cache.FUNCTION_SET_FROM_TYPE.get(type, None)
     
