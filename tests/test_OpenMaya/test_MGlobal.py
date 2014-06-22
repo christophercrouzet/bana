@@ -11,7 +11,7 @@ banana.maya.patch()
 
 class MGlobalTest(unittest.TestCase):
     
-    def test_getFunctionSetFromType(self):
+    def test_bnn_getFunctionSetFromType(self):
         OpenMaya.MFileIO.newFile(True)
         cmds.group(name='transform', empty=True)
         cmds.polyCube(name='cube')
@@ -34,7 +34,7 @@ class MGlobalTest(unittest.TestCase):
         node = OpenMaya.MDagPath.bnn_get('light').bnn_findShape()
         self.assertIs(OpenMaya.MGlobal.bnn_getFunctionSetFromType(node.apiType()), OpenMaya.MFnPointLight)
     
-    def test_isValidShortNamePattern(self):
+    def test_bnn_isValidShortNamePattern(self):
         self.assertTrue(OpenMaya.MGlobal.bnn_isValidShortNamePattern('node'))
         self.assertTrue(OpenMaya.MGlobal.bnn_isValidShortNamePattern('node1'))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidShortNamePattern('1node'))
@@ -168,7 +168,7 @@ class MGlobalTest(unittest.TestCase):
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidShortNamePattern('|node->*->moreunderworld', wildcards=True))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidShortNamePattern('|node->|*->|moreunderworld', wildcards=True))
     
-    def test_isValidNamePattern(self):
+    def test_bnn_isValidNamePattern(self):
         self.assertTrue(OpenMaya.MGlobal.bnn_isValidNamePattern('node'))
         self.assertTrue(OpenMaya.MGlobal.bnn_isValidNamePattern('node1'))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidNamePattern('1node'))
@@ -302,7 +302,7 @@ class MGlobalTest(unittest.TestCase):
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidNamePattern('|node->*->moreunderworld', wildcards=True))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidNamePattern('|node->|*->|moreunderworld', wildcards=True))
     
-    def test_isValidPathPattern(self):
+    def test_bnn_isValidPathPattern(self):
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidPathPattern('node'))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidPathPattern('node1'))
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidPathPattern('1node'))
@@ -436,7 +436,7 @@ class MGlobalTest(unittest.TestCase):
         self.assertFalse(OpenMaya.MGlobal.bnn_isValidPathPattern('|node->*->moreunderworld', wildcards=True))
         self.assertTrue(OpenMaya.MGlobal.bnn_isValidPathPattern('|node->|*->|moreunderworld', wildcards=True))
     
-    def test_normalizeName(self):
+    def test_bnn_normalizeName(self):
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizeName(''), '*')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizeName(None), '*')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizeName('node'), 'node')
@@ -572,7 +572,7 @@ class MGlobalTest(unittest.TestCase):
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizeName('|node->*->moreunderworld', wildcards=True), 'node__*__moreunderworld')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizeName('|node->|*->|moreunderworld', wildcards=True), 'node___*___moreunderworld')
     
-    def test_normalizePath(self):
+    def test_bnn_normalizePath(self):
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizePath(''), '*|*')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizePath(None), '*|*')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizePath('node'), '*|node')
@@ -708,7 +708,7 @@ class MGlobalTest(unittest.TestCase):
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizePath('|node->*->moreunderworld', wildcards=True), '|node->|*->|moreunderworld')
         self.assertEqual(OpenMaya.MGlobal.bnn_normalizePath('|node->|*->|moreunderworld', wildcards=True), '|node->|*->|moreunderworld')
     
-    def test_matchPath(self):
+    def test_bnn_matchPath(self):
         self.assertTrue(OpenMaya.MGlobal.bnn_matchPath('|node', '|node'))
         self.assertTrue(OpenMaya.MGlobal.bnn_matchPath('|*node', '|node'))
         self.assertTrue(OpenMaya.MGlobal.bnn_matchPath('|node*', '|node'))
