@@ -267,6 +267,32 @@ class MDagPathTest(unittest.TestCase):
         names = [node.fullPathName() for node in nodes]
         self.assertEqual(sorted(names), ['|master|sphere|sphereShape->|projectionCurve1|projectionCurve1_1|projectionCurve1_Shape1', '|master|sphere|sphereShape->|projectionCurve1|projectionCurve1_2|projectionCurve1_Shape2'])
     
+    def test_bnn_asFunctionSet(self):
+        node = OpenMaya.MDagPath.bnn_get(pattern='master')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnTransform)
+        self.assertEqual(functionSet.fullPathName(), '|master')
+        
+        node = OpenMaya.MDagPath.bnn_get(pattern='cubeShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnMesh)
+        self.assertEqual(functionSet.fullPathName(), '|master|cube|cubeShape')
+        
+        node = OpenMaya.MDagPath.bnn_get(pattern='sphereShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnNurbsSurface)
+        self.assertEqual(functionSet.fullPathName(), '|master|sphere|sphereShape')
+        
+        node = OpenMaya.MDagPath.bnn_get(pattern='circleShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnNurbsCurve)
+        self.assertEqual(functionSet.fullPathName(), '|master|circle|circleShape')
+        
+        node = OpenMaya.MDagPath.bnn_get(pattern='awesome:lightShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnPointLight)
+        self.assertEqual(functionSet.fullPathName(), '|master|awesome:light|awesome:lightShape')
+    
     def test_bnn_findChild_1(self):
         master = OpenMaya.MDagPath.bnn_get('|master')
         self.assertIsNone(master.bnn_findChild(pattern=''))

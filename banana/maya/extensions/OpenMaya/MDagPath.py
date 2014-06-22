@@ -73,6 +73,17 @@ class MDagPath(object):
         """
         return list(OpenMaya.bnn_MItDagNode(pattern=pattern, types=types))
     
+    def bnn_asFunctionSet(self):
+        """Convert this DAG path into the function set it represents.
+        
+        Returns
+        -------
+        class inheriting from maya.OpenMaya.MFnBase
+            The function set represented by this DAG path.
+        """
+        cls = self.node().bnn_getFunctionSet()
+        return cls(self) if cls else OpenMaya.MFnDagNode(self)
+    
     def bnn_findChild(self, pattern='', types=None, recursive=False):
         """Find a child node.
         

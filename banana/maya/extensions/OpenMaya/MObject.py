@@ -99,3 +99,15 @@ class MObject(object):
         
         banana.maya._cache.FUNCTION_SET_FROM_TYPE[type] = cls
         return cls
+    
+    def bnn_asFunctionSet(self):
+        """Convert this object into the function set it represents.
+        
+        Returns
+        -------
+        class inheriting from maya.OpenMaya.MFnBase
+            The function set represented by this object. None is returned if
+            the conversion couldn't be made.
+        """
+        cls = self.bnn_getFunctionSet()
+        return cls(self) if cls else None

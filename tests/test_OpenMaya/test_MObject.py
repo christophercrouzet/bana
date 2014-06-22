@@ -313,6 +313,42 @@ class MObjectTest(unittest.TestCase):
         
         node = OpenMaya.MObject.bnn_get(pattern='awesome:lightShape')
         self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnPointLight)
+    
+    def test_bnn_asFunctionSet(self):
+        node = OpenMaya.MObject.bnn_get('time1')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnDependencyNode)
+        self.assertEqual(functionSet.name(), 'time1')
+        
+        node = OpenMaya.MObject.bnn_get('defaultObjectSet')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnSet)
+        self.assertEqual(functionSet.name(), 'defaultObjectSet')
+        
+        node = OpenMaya.MObject.bnn_get(pattern='master')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnTransform)
+        self.assertEqual(functionSet.fullPathName(), '|master')
+        
+        node = OpenMaya.MObject.bnn_get(pattern='cubeShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnMesh)
+        self.assertEqual(functionSet.fullPathName(), '|master|cube|cubeShape')
+        
+        node = OpenMaya.MObject.bnn_get(pattern='sphereShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnNurbsSurface)
+        self.assertEqual(functionSet.fullPathName(), '|master|sphere|sphereShape')
+        
+        node = OpenMaya.MObject.bnn_get(pattern='circleShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnNurbsCurve)
+        self.assertEqual(functionSet.fullPathName(), '|master|circle|circleShape')
+        
+        node = OpenMaya.MObject.bnn_get(pattern='awesome:lightShape')
+        functionSet = node.bnn_asFunctionSet()
+        self.assertIsInstance(functionSet, OpenMaya.MFnPointLight)
+        self.assertEqual(functionSet.fullPathName(), '|master|awesome:light|awesome:lightShape')
 
 
 if __name__ == '__main__':
