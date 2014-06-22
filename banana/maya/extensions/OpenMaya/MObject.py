@@ -11,6 +11,8 @@
 import gorilla
 from maya import OpenMaya
 
+import banana.maya._cache
+
 
 @gorilla.patch(OpenMaya)
 class MObject(object):
@@ -61,3 +63,39 @@ class MObject(object):
         """
         return list(OpenMaya.bnn_MItDependencyNode(pattern=pattern,
                                                    types=types))
+    
+    def bnn_getFunctionSet(self):
+        """Retrieve the function set that this object represents.
+        
+        If the correspondance of this object's type with a function set is
+        not already known, then the function set is deduced by recursively
+        inspecting all the subclasses from `~maya.OpenMaya.MFnBase` until no
+        matches are found. The result is then cached and accessible with a
+        call to the `~maya.OpenMaya.MGlobal.bnn_getFunctionSetFromType`
+        function.
+        
+        Returns
+        -------
+        class inheriting from maya.OpenMaya.MFnBase
+            The function set found, None otherwise.
+        """
+        type = self.apiType()
+        if type in banana.maya._cache.FUNCTION_SET_FROM_TYPE:
+            return banana.maya._cache.FUNCTION_SET_FROM_TYPE[type]
+        
+        cls = OpenMaya.MFnBase
+        while True:
+            base = cls
+            for item in base.__subclasses__():
+                if self.hasFn(item().type()):
+                    cls = item
+                    break
+            
+            if cls is base:
+                break
+        
+        if cls is OpenMaya.MFnBase:
+            cls = None
+        
+        banana.maya._cache.FUNCTION_SET_FROM_TYPE[type] = cls
+        return cls

@@ -291,6 +291,28 @@ class MObjectTest(unittest.TestCase):
             self.assertIsInstance(node, OpenMaya.MObject)
         names = [OpenMaya.MFnDependencyNode(node).name() for node in nodes]
         self.assertEqual(sorted(names), ['defaultLightSet', 'defaultObjectSet'])
+    
+    def test_bnn_getFunctionSet(self):
+        node = OpenMaya.MObject.bnn_get('time1')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnDependencyNode)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='defaultObjectSet')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnSet)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='master')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnTransform)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='cubeShape')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnMesh)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='sphereShape')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnNurbsSurface)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='circleShape')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnNurbsCurve)
+        
+        node = OpenMaya.MObject.bnn_get(pattern='awesome:lightShape')
+        self.assertIs(node.bnn_getFunctionSet(), OpenMaya.MFnPointLight)
 
 
 if __name__ == '__main__':
