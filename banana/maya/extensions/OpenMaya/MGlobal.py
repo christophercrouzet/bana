@@ -13,6 +13,8 @@ import re
 import gorilla
 from maya import OpenMaya
 
+import banana.maya._cache
+
 
 _SHORT_NAME_PATTERN = r'[a-zA-Z_][\w]*'
 _SHORT_NAME_WILD_PATTERN = r'[a-zA-Z_\*][\w\*]*'
@@ -66,10 +68,6 @@ _RE_PATH_INVALID_CHARACTERS = re.compile(
 _RE_PATH_INVALID_CHARACTERS_WILD = re.compile(
     r'[^\w\*\|\:]')
 
-_FUNCTION_SET_FROM_TYPE = {
-    cls().type(): cls for name, cls in OpenMaya.__dict__.iteritems()
-    if name.startswith('MFn') and name != 'MFnBase' and hasattr(cls, 'type')}
-
 
 @gorilla.patch(OpenMaya)
 class MGlobal(object):
@@ -101,7 +99,7 @@ class MGlobal(object):
         >>> cls = OpenMaya.MGlobal.bnn_getFunctionSetFromType(dagPath.apiType())
         >>> transform = cls(dagPath)
         """
-        return _FUNCTION_SET_FROM_TYPE.get(type, None)
+        return banana.maya._cache.FUNCTION_SET_FROM_TYPE.get(type, None)
     
     @classmethod
     def bnn_isValidShortNamePattern(cls, name, wildcards=False):
