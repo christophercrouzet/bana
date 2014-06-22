@@ -14,8 +14,8 @@ Getting Started
    installation
 
 
-Reference
----------
+Diving into the Code
+--------------------
 
 .. toctree::
    :maxdepth: 2
