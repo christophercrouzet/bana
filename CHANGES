@@ -1,3 +1,14 @@
+v0.0.2 (2014-06-22)
+-------------------
+
+* Added a method ``bnn_asFunctionSet`` to the ``MObject`` and ``MDagPath``
+  classes.
+* Added a method ``bnn_getFunctionSet`` to the ``MObject`` class.
+* Created a new internal module for data caching.
+* Added the missing ``bnn`` identifiers for the test routines.
+* Minor changes.
+
+
 v0.0.1 (2014-06-21)
 -------------------
 
