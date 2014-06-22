@@ -96,7 +96,8 @@ class MGlobal(object):
         >>> from maya import OpenMaya, cmds
         >>> cmds.group(name='transform', empty=True)
         >>> dagPath = OpenMaya.MDagPath.bnn_get(pattern='transform')
-        >>> cls = OpenMaya.MGlobal.bnn_getFunctionSetFromType(dagPath.apiType())
+        >>> type = dagPath.apiType()
+        >>> cls = OpenMaya.MGlobal.bnn_getFunctionSetFromType(type)
         >>> transform = cls(dagPath)
         """
         return banana.maya._cache.FUNCTION_SET_FROM_TYPE.get(type, None)
