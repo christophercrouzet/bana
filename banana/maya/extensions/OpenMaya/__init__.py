@@ -15,5 +15,6 @@ __all__ = [
     'MFnDagNode',
     'MFnDependencyNode',
     'MFnTransform',
+    'MGlobal',
     'MObject'
 ]
