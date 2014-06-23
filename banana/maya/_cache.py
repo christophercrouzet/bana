@@ -1,6 +1,6 @@
 """
-    gorilla._cache
-    ~~~~~~~~~~~~~~
+    banana.maya._cache
+    ~~~~~~~~~~~~~~~~~~
     
     Cached data.
     
