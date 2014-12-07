@@ -44,7 +44,7 @@ class MFileIO(object):
         if not nameSpace:
             nameSpace = None
         
-        topLevelDagPaths = list(OpenMaya.bnn_MItDagHierarchy())
+        topLevelDagPaths = set(OpenMaya.bnn_MItDagHierarchy())
         OpenMaya.MFileIO.importFile(fileName, type, preserveReferences,
                                     nameSpace, ignoreVersion)
         return [dagPath for dagPath in OpenMaya.bnn_MItDagHierarchy()
