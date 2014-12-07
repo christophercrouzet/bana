@@ -15,6 +15,20 @@ from maya import OpenMaya
 @gorilla.patch(OpenMaya)
 class MFnDependencyNode(object):
     
+    def __hash__(self):
+        """Retrieve a hash value that can be relied on.
+        
+        This is required because the default
+        `~maya.OpenMaya.MFnDependencyNode.__hash__()` method returns different
+        values for multiple instances pointing to a same object.
+        
+        Returns
+        -------
+        int
+            The hash value representing this object.
+        """
+        return OpenMaya.MObjectHandle(self.object()).hashCode()
+    
     @classmethod
     def bnn_get(cls, pattern):
         """Retrieve a node.

@@ -17,6 +17,20 @@ import banana.maya._cache
 @gorilla.patch(OpenMaya)
 class MObject(object):
     
+    def __hash__(self):
+        """Retrieve a hash value that can be relied on.
+        
+        This is required because the default
+        `~maya.OpenMaya.MObject.__hash__()` method returns different values
+        for multiple instances pointing to a same object.
+        
+        Returns
+        -------
+        int
+            The hash value representing this object.
+        """
+        return OpenMaya.MObjectHandle(self).hashCode()
+    
     @classmethod
     def bnn_get(cls, pattern, types=None):
         """Retrieve a node.
