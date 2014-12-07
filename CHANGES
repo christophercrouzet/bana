@@ -1,3 +1,11 @@
+v0.0.3 (2014-12-07)
+-------------------
+
+* Overridden the `__hash__` method for the `MDagPath`, `MFnDependencyNode`,
+  and `MObject` classes.
+* Minor changes.
+
+
 v0.0.2 (2014-06-22)
 -------------------
 
