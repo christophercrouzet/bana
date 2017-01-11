@@ -40,19 +40,16 @@ built with the help of the package |revl|_ helps to ensure that these
 extensions remain as fast as possible.
 
 
-.. note::
+Notes
+-----
 
-   Bana extends on Maya's Python API 1.0 rather than 2.0 because the latter
-   version seems to be still incomplete. That being said, it is encouraged
-   to use the API 2.0 whenever possible since it provides a much more Pythonic
-   interface with increased performances.
+Bana extends on Maya's Python API 1.0 rather than 2.0 because the latter
+version seems to be still incomplete. That being said, it is encouraged to use
+the API 2.0 whenever possible since it provides a much more Pythonic interface
+with increased performances.
 
-
-.. note::
-
-   Bana does *not* aim at making the API more Pythonic. This could in some
-   cases impact the performances, which goes against Bana's goal of keeping
-   things fast.
+Bana does *not* aim at making the API more Pythonic. This could in some cases
+impact the performances, which goes against Bana's goal of keeping things fast.
 
 
 Features
@@ -108,7 +105,12 @@ Thanks
   Maya object return different hash values.
 
 
+.. |gorilla| replace:: ``gorilla``
+.. |revl| replace:: ``revl``
+
 .. _Autodesk Maya: http://www.autodesk.com/products/maya
 .. _bana.readthedocs.io: https://bana.readthedocs.io
 .. _GitHub project page: https://github.com/christophercrouzet/bana
+.. _gorilla: https://github.com/christophercrouzet/gorilla
+.. _revl: https://github.com/christophercrouzet/revl
 .. _Tutorial: https://bana.readthedocs.io/en/latest/tutorial.html
