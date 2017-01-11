@@ -1,12 +1,14 @@
+.. currentmodule:: bana
+
 .. _reference:
 
-Reference
-=========
+API Reference
+=============
 
-The extensions are organized in folders matching the Maya modules.
-
+All the extensions of Bana are described here.
 
 .. toctree::
    :maxdepth: 2
-   
-   OpenMaya
+
+   initialization
+   extensions

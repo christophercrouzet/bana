@@ -1,6 +1,12 @@
-include CHANGES
+include CHANGELOG
 include LICENSE
 include README.rst
 
+recursive-include benchmarks *
 recursive-include doc *
 recursive-include tests *
+
+global-exclude .git*
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.lprof

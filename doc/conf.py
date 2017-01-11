@@ -2,89 +2,105 @@
 
 import os
 import sys
-
-src_path = os.path.abspath('..')
-if not src_path in sys.path:
-    sys.path.insert(0, src_path)
+sys.path.insert(0, os.path.abspath(os.pardir))
 
 
 class Mock(object):
-    
+
     __all__ = []
-    
-    def __init__(self, *args, **kwargs):
-        pass
-    
+
+    def __init__(self, signature, *args, **kwargs):
+        self._signature = signature
+
+    def __repr__(self):
+        return self._signature
+
     def __call__(self, *args, **kwargs):
-        return Mock()
-    
-    @classmethod
-    def __getattr__(cls, name):
+        return Mock('%s()' % (self._signature,))
+
+    def __getattr__(self, name):
         if name in ('__file__', '__path__'):
             return '/dev/null'
-        elif name[0] == name[0].upper():
-            mock_type = type(name, (), {})
-            mock_type.__module__ = __name__
-            return mock_type
         else:
-            return Mock()
+            return Mock('%s.%s' % (self._signature, name))
 
 
 MOCK_MODULES = ['maya']
-for module_name in MOCK_MODULES:
-    sys.modules[module_name] = Mock()
+for module in MOCK_MODULES:
+    sys.modules[module] = Mock(module)
 
 
-import banana.maya
+from datetime import datetime
 
-import sphinx
+import bana
 
 
 # -- General configuration ------------------------------------------------
+
+needs_sphinx = '1.3'
 
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
-    'sphinx.ext.viewcode'
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
 ]
-
-if sphinx.version_info >= (1, 3):
-    extensions.append('sphinx.ext.napoleon')
-else:
-    extensions.append('sphinxcontrib.napoleon')
 
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = u'banana.maya'
-copyright = u'2014, Christopher Crouzet'
-version = banana.maya.__version__
+project = u'bana'
+copyright = u"2014-%i, Christopher Crouzet" % (datetime.utcnow().year,)
+author = u"Christopher Crouzet"
+version = bana.__version__
 release = version
+language = None
 
-exclude_patterns = []
-default_role = 'autolink'
-
-add_module_names = False
-show_authors = False
-
-pygments_style = 'sphinx'
+add_module_names = True
 autodoc_member_order = 'bysource'
+default_role = 'autolink'
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+pygments_style = 'sphinx'
+show_authors = False
+todo_include_todos = False
+
+description = (
+    "Bana is a set of extensions for Autodesk Maya's Python API."
+)
 
 
 # -- Options for HTML output ----------------------------------------------
 
-if os.environ.get('READTHEDOCS', None) != 'True':
-    try:
-        import sphinx_rtd_theme
-        html_theme = 'sphinx_rtd_theme'
-        html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    except ImportError:
-        pass
+html_description = description.replace(
+    'Autodesk Maya',
+    '<a href="http://www.autodesk.com/products/maya">Autodesk Maya</a>')
 
+html_theme = 'alabaster'
+html_theme_options = {
+    'description': html_description,
+    'github_user': 'christophercrouzet',
+    'github_repo': 'bana',
+    'github_type': 'star',
+    'fixed_sidebar': True,
+}
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'links.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
 html_static_path = ['_static']
-htmlhelp_basename = 'bananamayadoc'
+
+
+# -- Options for HTMLHelp output ------------------------------------------
+
+htmlhelp_basename = 'banadoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -93,24 +109,20 @@ latex_elements = {
 }
 
 latex_documents = [
-    ('index', 'bananamaya.tex', u'banana.maya Documentation',
-     u'Christopher Crouzet', 'manual')
+    (master_doc, 'bana.tex', u"bana Documentation", author, 'manual'),
 ]
 
 
 # -- Options for manual page output ---------------------------------------
 
 man_pages = [
-    ('index', 'bananamaya', u'banana.maya Documentation',
-     [u'Christopher Crouzet'], 1)
+    (master_doc, 'bana', u"bana Documentation", [author], 1)
 ]
 
 
 # -- Options for Texinfo output -------------------------------------------
 
 texinfo_documents = [
-      ('index', 'bananamaya', u'banana.maya Documentation',
-       u'Christopher Crouzet', 'bananamaya',
-       'Extensions for the Python API of Autodesk Maya.',
-       'Miscellaneous')
+    (master_doc, 'bana', u"bana Documentation", author, 'bana', description,
+     'Miscellaneous'),
 ]

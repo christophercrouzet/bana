@@ -3,75 +3,86 @@
 Installation
 ============
 
-Banana for Maya is written in the Python language and has been tested with
-Maya 2015 running on Mac OS X 10.9.
+Bana requires to be run from within an `Autodesk Maya`_'s Python environment.
+This is usually done either by running the code from within an interactive
+session of Maya, or through using the ``mayapy`` shell. A Python interpreter is
+already distributed with Maya so there is no need to install one.
 
-It relies on the library `Gorilla`_.
+Additionally, Bana depends on the |gorilla|_ package.
 
+.. note::
 
-The Easy Way
-------------
-
-If your Python-fu is up-to-date and you possess the latest trend in
-installation tools [1]_, then you can install the most recent version of
-Gorilla using `pip`_:
-
-.. code-block:: bash
-   
-   $ pip install banana.maya
-
-
-An alternative would be to use `easy_install`_ (included in `setuptools`_):
-
-.. code-block:: bash
-   
-   $ easy_install banana.maya
-
-
-From the Source
----------------
-
-You can also download a compressed archive containing the source from either
-`PyPI`_ or `GitHub`_. 
-
-Then, it's only a matter of:
-
-1. Decompressing the archive.
-2. Running ``python setup.py install`` from the resulting directory.
-
-You'll need to repeat those steps for the dependency that this library
-relies on: `Gorilla`_.
-
-
-Development Version
--------------------
-
-If you want to stay cutting edge by using the development version, then
-you can:
-
-1. Install `Git`_.
-2. ``git clone https://github.com/christophercrouzet/banana.maya.git``.
-3. ``cd banana.maya``.
-4. ``pip install --editable .`` or ``python setup.py develop``.
+   Package dependencies are automatically being taken care off when using
+   ``pip``.
 
 
 Installing pip
 --------------
 
-1. Download `get-pip.py`_.
-2. Run ``python get-pip.py``.
+The recommended [1]_ approach for installing a Python package such as Bana is
+to use |pip|_, a package manager for projects written in Python. If ``pip`` is
+not already installed on your system, you can do so by following these steps:
+
+    1. Download |get-pip.py|_.
+    2. Run ``python get-pip.py`` in a shell.
+
+
+.. note::
+
+   The installation commands described in this page might require ``sudo``
+   privileges to run successfully.
+
+
+System-Wide Installation
+------------------------
+
+Installing globally the most recent version of Bana can be done with ``pip``:
+
+.. code-block:: bash
+
+   $ pip install bana
+
+
+Or using |easy_install|_ (provided with |setuptools|_):
+
+.. code-block:: bash
+
+   $ easy_install bana
+
+
+Development Version
+-------------------
+
+To stay cutting edge with the latest development progresses, it is possible to
+directly retrieve the source from the repository with the help of `Git`_:
+
+.. code-block:: bash
+
+   $ git clone https://github.com/christophercrouzet/bana.git
+   $ cd bana
+   $ pip install --editable .[dev]
+
+
+.. note::
+
+   The ``[dev]`` part installs additional dependencies required to assist
+   development on Bana.
 
 ----
 
 .. [1] See the `Python Packaging User Guide`_
 
+.. |easy_install| replace:: ``easy_install``
+.. |get-pip.py| replace:: ``get-pip.py``
+.. |gorilla| replace:: ``gorilla``
+.. |pip| replace:: ``pip``
+.. |setuptools| replace:: ``setuptools``
 
-.. _Git: http://git-scm.com/
-.. _GitHub: https://github.com/christophercrouzet/banana.maya
-.. _Gorilla: https://github.com/christophercrouzet/gorilla
-.. _PyPI: https://pypi.python.org/pypi/banana.maya
-.. _Python Packaging User Guide: http://python-packaging-user-guide.readthedocs.org/
-.. _easy_install: http://peak.telecommunity.com/DevCenter/EasyInstall
+.. _Autodesk Maya: http://www.autodesk.com/products/maya
+.. _easy_install: https://setuptools.readthedocs.io/en/latest/easy_install.html
 .. _get-pip.py: https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-.. _pip: https://pypi.python.org/pypi/pip
-.. _setuptools: https://pypi.python.org/pypi/setuptools
+.. _Git: https://git-scm.com
+.. _gorilla: https://github.com/christophercrouzet/gorilla
+.. _pip: https://pip.pypa.io
+.. _Python Packaging User Guide: https://packaging.python.org/current/
+.. _setuptools: https://github.com/pypa/setuptools
