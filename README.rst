@@ -95,7 +95,7 @@ Author
 ------
 
 Christopher Crouzet
-<`christophercrouzet.com <http://christophercrouzet.com>`_>
+<`christophercrouzet.com <https://christophercrouzet.com>`_>
 
 
 Thanks
