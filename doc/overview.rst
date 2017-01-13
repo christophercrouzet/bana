@@ -44,6 +44,12 @@ extensions remain as fast as possible.
    things fast.
 
 
+.. note::
+
+   Bana *does* aim at following Maya's API philosophy by providing low-level
+   extensions that are not specific to a domain (e.g.: rigging).
+
+
 Features
 --------
 

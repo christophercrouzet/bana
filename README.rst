@@ -51,6 +51,9 @@ with increased performances.
 Bana does *not* aim at making the API more Pythonic. This could in some cases
 impact the performances, which goes against Bana's goal of keeping things fast.
 
+Bana *does* aim at following Maya's API philosophy by providing low-level
+extensions that are not specific to a domain (e.g.: rigging).
+
 
 Features
 --------
