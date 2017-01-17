@@ -68,14 +68,14 @@ class BenchRunner(object):
                 stack.extend(suites)
 
                 seen = set()
-                classes = [case.__class__ for case in cases
-                           if case.__class__ not in seen
-                           and seen.add(case.__class__) is None]
+                classes = [type(case) for case in cases
+                           if type(case) not in seen
+                           and seen.add(type(case)) is None]
                 for cls in classes:
                     stack.append(_Message(type=_MESSAGE_SUITE_SETUP,
                                           value=cls))
                     stack.extend(case for case in cases
-                                 if case.__class__ is cls)
+                                 if type(case) is cls)
                     stack.append(_Message(type=_MESSAGE_SUITE_TEARDOWN,
                                           value=cls))
             else:
@@ -89,8 +89,8 @@ class BenchRunner(object):
 
                 elapsed, unit = _convertTimeUnit(elapsed)
                 print("%s (%s.%s) ... %.3f %ss"
-                      % (_getBenchName(obj), obj.__class__.__module__,
-                         obj.__class__.__name__, elapsed, unit))
+                      % (_getBenchName(obj), type(obj).__module__,
+                         type(obj).__name__, elapsed, unit))
 
         return DummyResult()
 
@@ -145,7 +145,7 @@ def _getBenchName(bench):
 
 
 def _getBenchFullName(bench):
-    return '%s.%s.%s' % (bench.__class__.__module__, bench.__class__.__name__,
+    return '%s.%s.%s' % (type(bench).__module__, type(bench).__name__,
                          _getBenchName(bench))
 
 
