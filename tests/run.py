@@ -25,10 +25,11 @@ def _findTests(path, selectors=None):
                        for selector in selectors)
 
     out = []
+    loader = unittest.TestLoader()
     if path == '__main__':
-        rootTest = unittest.TestLoader().loadTestsFromModule(sys.modules[path])
+        rootTest = loader.loadTestsFromModule(sys.modules[path])
     else:
-        rootTest = unittest.TestLoader().discover(path)
+        rootTest = loader.discover(path)
 
     stack = collections.deque((rootTest,))
     while stack:
