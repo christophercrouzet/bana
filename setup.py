@@ -28,7 +28,7 @@ setuptools.setup(
     version=_findVersion('bana', '__init__.py'),
     description="Set of extensions for Autodesk Maya's Python API",
     long_description=_read('README.rst'),
-    keywords='Autodesk Maya API extension gorilla monkey patch',
+    keywords='Autodesk Maya gorilla API extensions monkey patch patching revl',
     license='MIT',
     url='https://github.com/christophercrouzet/bana',
     author="Christopher Crouzet",
@@ -37,11 +37,12 @@ setuptools.setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Utilities'
+        'Topic :: Utilities',
     ],
     install_requires=['gorilla>=0.2.0'],
     extras_require={
