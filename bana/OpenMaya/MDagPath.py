@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MDagPath
-    ~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MDagPath`` class.
 
-    Extensions for the ``maya.OpenMaya.MDagPath`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -16,6 +12,7 @@ from bana import _iterator
 
 @gorilla.patches(OpenMaya.MDagPath)
 class MDagPath(object):
+    """Container for the extensions."""
 
     @classmethod
     def bnFind(cls, pattern=None, fnType=OpenMaya.MFn.kInvalid, recursive=True,

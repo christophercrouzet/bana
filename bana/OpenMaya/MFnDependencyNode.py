@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MFnDependencyNode
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MFnDependencyNode`` class.
 
-    Extensions for the ``maya.OpenMaya.MFnDependencyNode`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -14,6 +10,7 @@ from maya import OpenMaya
 
 @gorilla.patches(OpenMaya.MFnDependencyNode)
 class MFnDependencyNode(object):
+    """Container for the extensions."""
 
     @classmethod
     def bnFind(cls, pattern=None):

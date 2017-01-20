@@ -1,11 +1,7 @@
-"""
-    bana._iterator
-    ~~~~~~~~~~~~~~
+"""Iterators.
 
-    Iterators.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 from maya import OpenMaya

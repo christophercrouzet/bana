@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MVector
-    ~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MVector`` class.
 
-    Extensions for the ``maya.OpenMaya.MVector`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -17,6 +13,7 @@ _MScriptUtil = OpenMaya.MScriptUtil
 
 @gorilla.patches(OpenMaya.MVector)
 class MVector(object):
+    """Container for the extensions."""
 
     @gorilla.filter(True)
     @gorilla.settings(allow_hit=True)

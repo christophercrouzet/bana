@@ -4,14 +4,10 @@
 #   |_____|___._|__|__|___._|
 #
 
-"""
-    bana
-    ~~~~
+"""Set of extensions for Autodesk Maya's Python API.
 
-    Set of extensions for Autodesk Maya's Python API.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import importlib

@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MFnDagNode
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MFnDagNode`` class.
 
-    Extensions for the ``maya.OpenMaya.MFnDagNode`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -14,6 +10,7 @@ from maya import OpenMaya
 
 @gorilla.patches(OpenMaya.MFnDagNode)
 class MFnDagNode(object):
+    """Container for the extensions."""
 
     @classmethod
     def bnFind(cls, pattern=None, recursive=True, traverseUnderWorld=True):

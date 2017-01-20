@@ -1,11 +1,7 @@
-"""
-    bana._pattern
-    ~~~~~~~~~~~~~
+"""Pattern utilities.
 
-    Pattern utilities.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 # Here be dragons. You most likely do not want to modify or even try to

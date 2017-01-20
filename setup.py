@@ -46,7 +46,8 @@ setuptools.setup(
     ],
     install_requires=['gorilla>=0.2.0'],
     extras_require={
-        'dev': ['coverage', 'sphinx>=1.3', 'revl'],
+        'dev': ['coverage', 'pycodestyle', 'pydocstyle', 'pylint',
+                'sphinx>=1.3', 'revl'],
         'docs': ['sphinx>=1.3'],
     },
     packages=[

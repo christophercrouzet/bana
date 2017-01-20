@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MMatrix
-    ~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MMatrix`` class.
 
-    Extensions for the ``maya.OpenMaya.MMatrix`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import sys
@@ -25,6 +21,7 @@ _MScriptUtil = OpenMaya.MScriptUtil
 
 @gorilla.patches(OpenMaya.MMatrix)
 class MMatrix(object):
+    """Container for the extensions."""
 
     @gorilla.filter(True)
     @gorilla.settings(allow_hit=True)

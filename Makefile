@@ -32,10 +32,17 @@ doc:
 env:
 	virtualenv env
 
+lint:
+	@-pylint -r n bana
+
+style:
+	@-pycodestyle bana
+	@-pydocstyle bana
+
 test:
 	@$(PYTHON) -m unittest discover -s tests -v
 
 upload:
 	@twine upload dist/*
 
-.PHONY: clean coverage dist doc env test upload
+.PHONY: clean coverage dist doc env lint style test upload

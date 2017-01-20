@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MGlobal
-    ~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MGlobal`` class.
 
-    Extensions for the ``maya.OpenMaya.MGlobal`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -16,6 +12,7 @@ from bana import _pattern
 
 @gorilla.patches(OpenMaya.MGlobal)
 class MGlobal(object):
+    """Container for the extensions."""
 
     @classmethod
     def bnIsValidName(cls, name, allowWildcards=False):

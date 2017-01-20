@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MTransformationMatrix
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MTransformationMatrix`` class.
 
-    Extensions for the ``maya.OpenMaya.MTransformationMatrix`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -17,6 +13,7 @@ _MScriptUtil = OpenMaya.MScriptUtil
 
 @gorilla.patches(OpenMaya.MTransformationMatrix)
 class MTransformationMatrix(object):
+    """Container for the extensions."""
 
     def bnAddRotation(self, rotation,
                       order=OpenMaya.MTransformationMatrix.kXYZ,

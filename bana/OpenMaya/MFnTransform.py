@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MFnTransform
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MFnTransform`` class.
 
-    Extensions for the ``maya.OpenMaya.MFnTransform`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -17,6 +13,7 @@ _MScriptUtil = OpenMaya.MScriptUtil
 
 @gorilla.patches(OpenMaya.MFnTransform)
 class MFnTransform(object):
+    """Container for the extensions."""
 
     def bnGetScale(self):
         """Retrieve the scale component.

@@ -1,11 +1,7 @@
-"""
-    bana.OpenMaya.MQuaternion
-    ~~~~~~~~~~~~~~~~~~~~~~~~~
+"""Extensions for the ``maya.OpenMaya.MQuaternion`` class.
 
-    Extensions for the ``maya.OpenMaya.MQuaternion`` class.
-
-    :copyright: Copyright 2014-2017 by Christopher Crouzet.
-    :license: MIT, see LICENSE for details.
+:copyright: Copyright 2014-2017 by Christopher Crouzet.
+:license: MIT, see LICENSE for details.
 """
 
 import gorilla
@@ -14,6 +10,7 @@ from maya import OpenMaya
 
 @gorilla.patches(OpenMaya.MQuaternion)
 class MQuaternion(object):
+    """Container for the extensions."""
 
     @gorilla.filter(True)
     @gorilla.settings(allow_hit=True)
