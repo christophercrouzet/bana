@@ -1,23 +1,22 @@
 #!/usr/bin/env mayapy
 
-import maya.standalone
-maya.standalone.initialize()
-
 import os
 import sys
+import unittest
+
+import maya.standalone
+import revl
+from maya import OpenMaya
+
 _HERE = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(_HERE, *((os.pardir,) * 2))))
 
 import bana
+
+import benchmarks._preset
+
 bana.initialize()
-
-
-import unittest
-
-from maya import OpenMaya
-import revl
-
-from benchmarks import _preset
+maya.standalone.initialize()
 
 
 def _retrieveDeepestDagPath():
@@ -38,7 +37,7 @@ class MDagPathDeepSceneBench(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         OpenMaya.MFileIO.newFile(True)
-        revl.run(_preset.DEEP, 10000, seed=1.23)
+        revl.run(benchmarks._preset.DEEP, 10000, seed=1.23)
 
     def benchBnFind1(self):
         for _ in OpenMaya.MDagPath.bnFind():
@@ -108,7 +107,7 @@ class MDagPathFlatSceneBench(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         OpenMaya.MFileIO.newFile(True)
-        revl.run(_preset.FLAT, 10000, seed=1.23)
+        revl.run(benchmarks._preset.FLAT, 10000, seed=1.23)
 
     def benchBnFind1(self):
         for _ in OpenMaya.MDagPath.bnFind():

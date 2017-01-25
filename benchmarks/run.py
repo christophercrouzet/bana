@@ -1,13 +1,8 @@
 #!/usr/bin/env mayapy
 
-import os
-import sys
-_HERE = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(_HERE, os.pardir)))
-
-
 import argparse
 import collections
+import os
 import sys
 import timeit
 import unittest

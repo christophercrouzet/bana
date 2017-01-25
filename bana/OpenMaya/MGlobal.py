@@ -3,7 +3,7 @@
 import gorilla
 from maya import OpenMaya
 
-from bana import _pattern
+import bana._pattern
 
 
 @gorilla.patches(OpenMaya.MGlobal)
@@ -37,9 +37,9 @@ class MGlobal(object):
         :ref:`pattern_matching`.
         """
         if allowWildcards:
-            return bool(_pattern.NAME_WCARD_OBJ.match(name))
+            return bool(bana._pattern.NAME_WCARD_OBJ.match(name))
         else:
-            return bool(_pattern.NAME_OBJ.match(name))
+            return bool(bana._pattern.NAME_OBJ.match(name))
 
     @classmethod
     def bnIsValidFullName(cls, name, allowWildcards=False,
@@ -74,13 +74,13 @@ class MGlobal(object):
         """
         if allowWildcards:
             if matchRelative:
-                return bool(_pattern.RELATIVE_NAME_WCARD_OBJ.match(name))
+                return bool(bana._pattern.RELATIVE_NAME_WCARD_OBJ.match(name))
             else:
-                return bool(_pattern.FULL_NAME_WCARD_OBJ.match(name))
+                return bool(bana._pattern.FULL_NAME_WCARD_OBJ.match(name))
         elif matchRelative:
-            return bool(_pattern.RELATIVE_NAME_OBJ.match(name))
+            return bool(bana._pattern.RELATIVE_NAME_OBJ.match(name))
         else:
-            return bool(_pattern.FULL_NAME_OBJ.match(name))
+            return bool(bana._pattern.FULL_NAME_OBJ.match(name))
 
     @classmethod
     def bnIsValidPath(cls, path, allowWildcards=False):
@@ -109,9 +109,9 @@ class MGlobal(object):
         :ref:`pattern_matching`.
         """
         if allowWildcards:
-            return bool(_pattern.PATH_WCARD_OBJ.match(path))
+            return bool(bana._pattern.PATH_WCARD_OBJ.match(path))
         else:
-            return bool(_pattern.PATH_OBJ.match(path))
+            return bool(bana._pattern.PATH_OBJ.match(path))
 
     @classmethod
     def bnIsValidFullPath(cls, path, allowWildcards=False,
@@ -146,13 +146,13 @@ class MGlobal(object):
         """
         if allowWildcards:
             if matchRelative:
-                return bool(_pattern.RELATIVE_PATH_WCARD_OBJ.match(path))
+                return bool(bana._pattern.RELATIVE_PATH_WCARD_OBJ.match(path))
             else:
-                return bool(_pattern.FULL_PATH_WCARD_OBJ.match(path))
+                return bool(bana._pattern.FULL_PATH_WCARD_OBJ.match(path))
         elif matchRelative:
-            return bool(_pattern.RELATIVE_PATH_OBJ.match(path))
+            return bool(bana._pattern.RELATIVE_PATH_OBJ.match(path))
         else:
-            return bool(_pattern.FULL_PATH_OBJ.match(path))
+            return bool(bana._pattern.FULL_PATH_OBJ.match(path))
 
     @classmethod
     def bnMakeMatchNameFunction(cls, pattern):
@@ -199,12 +199,13 @@ class MGlobal(object):
         --------
         :ref:`pattern_matching`, :meth:`MGlobal.bnIsValidName`.
         """
-        hasWildcards = _pattern.hasWildcards(pattern)
+        hasWildcards = bana._pattern.hasWildcards(pattern)
         if not cls.bnIsValidName(pattern, allowWildcards=hasWildcards):
             raise ValueError("The name pattern '%s' is not valid."
                              % (pattern,))
 
-        return _pattern.makeMatchFunction(pattern, _pattern.CONTEXT_NAME)
+        return bana._pattern.makeMatchFunction(pattern,
+                                               bana._pattern.CONTEXT_NAME)
 
     @classmethod
     def bnMakeMatchFullNameFunction(cls, pattern, matchRelative=False):
@@ -241,14 +242,15 @@ class MGlobal(object):
         --------
         :ref:`pattern_matching`, :meth:`MGlobal.bnIsValidFullName`.
         """
-        hasWildcards = _pattern.hasWildcards(pattern)
+        hasWildcards = bana._pattern.hasWildcards(pattern)
         if not cls.bnIsValidFullName(pattern, allowWildcards=hasWildcards,
                                      matchRelative=matchRelative):
             raise ValueError("The full name pattern '%s' is not valid."
                              % (pattern,))
 
-        return _pattern.makeMatchFunction(pattern, _pattern.CONTEXT_FULL_NAME,
-                                          matchRelative=matchRelative)
+        return bana._pattern.makeMatchFunction(pattern,
+                                               bana._pattern.CONTEXT_FULL_NAME,
+                                               matchRelative=matchRelative)
 
     @classmethod
     def bnMakeMatchPathFunction(cls, pattern):
@@ -296,12 +298,13 @@ class MGlobal(object):
         --------
         :ref:`pattern_matching`, :meth:`MGlobal.bnIsValidPath`.
         """
-        hasWildcards = _pattern.hasWildcards(pattern)
+        hasWildcards = bana._pattern.hasWildcards(pattern)
         if not cls.bnIsValidPath(pattern, allowWildcards=hasWildcards):
             raise ValueError("The path pattern '%s' is not valid."
                              % (pattern,))
 
-        return _pattern.makeMatchFunction(pattern, _pattern.CONTEXT_PATH)
+        return bana._pattern.makeMatchFunction(pattern,
+                                               bana._pattern.CONTEXT_PATH)
 
     @classmethod
     def bnMakeMatchFullPathFunction(cls, pattern, matchRelative=False):
@@ -338,14 +341,15 @@ class MGlobal(object):
         --------
         :ref:`pattern_matching`, :meth:`MGlobal.bnIsValidFullPath`.
         """
-        hasWildcards = _pattern.hasWildcards(pattern)
+        hasWildcards = bana._pattern.hasWildcards(pattern)
         if not cls.bnIsValidFullPath(pattern, allowWildcards=hasWildcards,
                                      matchRelative=matchRelative):
             raise ValueError("The full path pattern '%s' is not valid."
                              % (pattern,))
 
-        return _pattern.makeMatchFunction(pattern, _pattern.CONTEXT_FULL_PATH,
-                                          matchRelative=matchRelative)
+        return bana._pattern.makeMatchFunction(pattern,
+                                               bana._pattern.CONTEXT_FULL_PATH,
+                                               matchRelative=matchRelative)
 
     @classmethod
     def bnMatchName(cls, pattern, name):

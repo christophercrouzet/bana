@@ -2,7 +2,11 @@
 
 import os
 import sys
+from datetime import datetime
+
 sys.path.insert(0, os.path.abspath(os.pardir))
+
+import bana
 
 
 class Mock(object):
@@ -28,11 +32,6 @@ class Mock(object):
 MOCK_MODULES = ['maya']
 for module in MOCK_MODULES:
     sys.modules[module] = Mock(module)
-
-
-from datetime import datetime
-
-import bana
 
 
 # -- General configuration ------------------------------------------------

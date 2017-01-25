@@ -1,22 +1,21 @@
 #!/usr/bin/env mayapy
 
-import maya.standalone
-maya.standalone.initialize()
-
 import os
 import sys
+import unittest
+
+import maya.standalone
+from maya import OpenMaya, cmds
+
 _HERE = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(_HERE, *((os.pardir,) * 2))))
 
 import bana
+
+import tests._util
+
 bana.initialize()
-
-
-import unittest
-
-from maya import OpenMaya, cmds
-
-from tests import _util
+maya.standalone.initialize()
 
 
 def _nodeCount():
@@ -33,44 +32,44 @@ class MFnDependencyNodeTest(unittest.TestCase):
 
     def setUp(self):
         OpenMaya.MFileIO.newFile(True)
-        context = _util.Context()
+        context = tests._util.Context()
 
-        master = _util.createTransform(context, name='master')
+        master = tests._util.createTransform(context, name='master')
 
-        _util.createTransform(context, name='node', parent=master)
-        _util.createTransform(context, name='awesome_node', parent=master)
-        _util.createTransform(context, name='node_awesome', parent=master)
-        _util.createTransform(context, name='n0de', parent=master)
+        tests._util.createTransform(context, name='node', parent=master)
+        tests._util.createTransform(context, name='awesome_node', parent=master)
+        tests._util.createTransform(context, name='node_awesome', parent=master)
+        tests._util.createTransform(context, name='n0de', parent=master)
 
-        root1 = _util.createTransform(context, name='root_1', parent=master)
-        child1 = _util.createTransform(context, name='child_1', parent=root1)
-        _util.createTransform(context, name='node', parent=child1)
+        root1 = tests._util.createTransform(context, name='root_1', parent=master)
+        child1 = tests._util.createTransform(context, name='child_1', parent=root1)
+        tests._util.createTransform(context, name='node', parent=child1)
 
-        root2 = _util.createTransform(context, name='root_2', parent=master)
-        child2 = _util.createTransform(context, name='child_2', parent=root2)
-        grandchild = _util.createTransform(context, name='grandchild', parent=child2)
-        _util.createTransform(context, name='node', parent=grandchild)
+        root2 = tests._util.createTransform(context, name='root_2', parent=master)
+        child2 = tests._util.createTransform(context, name='child_2', parent=root2)
+        grandchild = tests._util.createTransform(context, name='grandchild', parent=child2)
+        tests._util.createTransform(context, name='node', parent=grandchild)
 
-        cube, cubeShape = _util.createPolyCube(context, name='cube', parent=master)
+        cube, cubeShape = tests._util.createPolyCube(context, name='cube', parent=master)
 
-        intermediary1 = _util.createDagNode(context, 'mesh', name='intermediary1', parent=cube)
+        intermediary1 = tests._util.createDagNode(context, 'mesh', name='intermediary1', parent=cube)
         context.dg.newPlugValueBool(intermediary1.findPlug('intermediateObject'), True)
         context.dg.connect(cubeShape.findPlug('outMesh'), intermediary1.findPlug('inMesh'))
 
-        intermediary2 = _util.createDagNode(context, 'mesh', name='intermediary2', parent=cube)
+        intermediary2 = tests._util.createDagNode(context, 'mesh', name='intermediary2', parent=cube)
         context.dg.newPlugValueBool(intermediary2.findPlug('intermediateObject'), True)
         context.dg.connect(cubeShape.findPlug('outMesh'), intermediary2.findPlug('inMesh'))
 
-        template = _util.createDagNode(context, 'mesh', name='template', parent=cube)
+        template = tests._util.createDagNode(context, 'mesh', name='template', parent=cube)
         context.dg.newPlugValueBool(template.findPlug('template'), True)
         context.dg.connect(cubeShape.findPlug('outMesh'), template.findPlug('inMesh'))
 
-        sphere, sphereShape = _util.createNurbsSphere(context, name='sphere', parent=master)
-        circle, circleShape = _util.createNurbsCircle(context, name='circle', parent=master)
+        sphere, sphereShape = tests._util.createNurbsSphere(context, name='sphere', parent=master)
+        circle, circleShape = tests._util.createNurbsCircle(context, name='circle', parent=master)
 
         OpenMaya.MNamespace.addNamespace('awesome')
-        light = _util.createTransform(context, name='awesome:light', parent=master)
-        _util.createDagNode(context, 'pointLight', name='awesome:lightShape', parent=light)
+        light = tests._util.createTransform(context, name='awesome:light', parent=master)
+        tests._util.createDagNode(context, 'pointLight', name='awesome:lightShape', parent=light)
 
         context.dag.doIt()
         context.dg.doIt()

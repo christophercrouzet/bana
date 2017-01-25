@@ -3,7 +3,7 @@
 import gorilla
 from maya import OpenMaya
 
-from bana import _iterator
+import bana._iterator
 
 
 @gorilla.patches(OpenMaya.MDagPath)
@@ -48,9 +48,9 @@ class MDagPath(object):
         --------
         :ref:`pattern_matching`, :ref:`retrieving_nodes`.
         """
-        iterator = _iterator.dag(fnType=fnType, skipRoot=True,
-                                 recursive=recursive,
-                                 traverseUnderWorld=traverseUnderWorld)
+        iterator = bana._iterator.dag(fnType=fnType, skipRoot=True,
+                                      recursive=recursive,
+                                      traverseUnderWorld=traverseUnderWorld)
         if pattern is not None:
             if traverseUnderWorld:
                 match = OpenMaya.MGlobal.bnMakeMatchFullPathFunction(pattern)
@@ -180,9 +180,9 @@ class MDagPath(object):
         --------
         :ref:`pattern_matching`, :ref:`retrieving_nodes`.
         """
-        iterator = _iterator.dag(fnType=fnType, root=self, skipRoot=True,
-                                 recursive=recursive,
-                                 traverseUnderWorld=traverseUnderWorld)
+        iterator = bana._iterator.dag(fnType=fnType, root=self, skipRoot=True,
+                                      recursive=recursive,
+                                      traverseUnderWorld=traverseUnderWorld)
         if pattern is not None:
             length = len(self.fullPathName())
             if traverseUnderWorld:

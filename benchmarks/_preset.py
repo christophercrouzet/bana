@@ -1,5 +1,5 @@
-from maya import OpenMaya
 import revl
+from maya import OpenMaya
 
 
 def _createPrimitive(context, intermediate=False, template=False, **kwargs):
