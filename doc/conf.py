@@ -6,9 +6,6 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.abspath(os.pardir))
 
-import bana
-
-
 class Mock(object):
 
     __all__ = []
@@ -28,10 +25,11 @@ class Mock(object):
         else:
             return Mock('%s.%s' % (self._signature, name))
 
-
 MOCK_MODULES = ['maya']
 for module in MOCK_MODULES:
     sys.modules[module] = Mock(module)
+
+import bana
 
 
 # -- General configuration ------------------------------------------------
