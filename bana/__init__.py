@@ -4,18 +4,19 @@
 #   |_____|___._|__|__|___._|
 #
 
-"""Set of extensions for Autodesk Maya's Python API.
+"""Set of extensions for Autodesk Maya's Python API."""
 
-:copyright: Copyright 2014-2017 by Christopher Crouzet.
-:license: MIT, see LICENSE for details.
-"""
+__title__ = 'bana'
+__version__ = '0.1.0'
+__summary__ = "Set of extensions for Autodesk Maya's Python API"
+__url__ = 'https://github.com/christophercrouzet/bana'
+__author__ = "Christopher Crouzet"
+__contact__ = 'christopher.crouzet@gmail.com'
+__license__ = "MIT"
 
 import importlib
 
 import gorilla
-
-
-__version__ = '0.1.0'
 
 
 _PACKAGES = (

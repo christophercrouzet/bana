@@ -1,8 +1,4 @@
-"""Extensions for the ``maya.OpenMaya.MMatrix`` class.
-
-:copyright: Copyright 2014-2017 by Christopher Crouzet.
-:license: MIT, see LICENSE for details.
-"""
+"""Extensions for the ``maya.OpenMaya.MMatrix`` class."""
 
 import sys
 

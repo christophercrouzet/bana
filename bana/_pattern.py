@@ -1,8 +1,4 @@
-"""Pattern utilities.
-
-:copyright: Copyright 2014-2017 by Christopher Crouzet.
-:license: MIT, see LICENSE for details.
-"""
+"""Pattern utilities."""
 
 # Here be dragons. You most likely do not want to modify or even try to
 # understand any of the code in this file. Do yourself a favour and move on.

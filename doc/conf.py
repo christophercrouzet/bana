@@ -51,10 +51,11 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = u'bana'
-copyright = u"2014-%i, Christopher Crouzet" % (datetime.utcnow().year,)
-author = u"Christopher Crouzet"
+project = bana.__title__
 version = bana.__version__
+description = bana.__summary__
+author = bana.__author__
+copyright = "2014-%i, %s" % (datetime.utcnow().year, bana.__author__)
 release = version
 language = None
 
@@ -65,10 +66,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 show_authors = False
 todo_include_todos = False
-
-description = (
-    "Bana is a set of extensions for Autodesk Maya's Python API."
-)
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -93,14 +90,14 @@ html_sidebars = {
         'links.html',
         'searchbox.html',
         'donate.html',
-    ]
+    ],
 }
 html_static_path = ['_static']
 
 
 # -- Options for HTMLHelp output ------------------------------------------
 
-htmlhelp_basename = 'banadoc'
+htmlhelp_basename = '%sdoc' % (project,)
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -109,20 +106,21 @@ latex_elements = {
 }
 
 latex_documents = [
-    (master_doc, 'bana.tex', u"bana Documentation", author, 'manual'),
+    (master_doc, '%s.tex' % (project,), "%s Documentation" % (project,),
+     author, 'manual'),
 ]
 
 
 # -- Options for manual page output ---------------------------------------
 
 man_pages = [
-    (master_doc, 'bana', u"bana Documentation", [author], 1)
+    (master_doc, project, "%s Documentation" % (project,), [author], 1),
 ]
 
 
 # -- Options for Texinfo output -------------------------------------------
 
 texinfo_documents = [
-    (master_doc, 'bana', u"bana Documentation", author, 'bana', description,
-     'Miscellaneous'),
+    (master_doc, project, "%s Documentation" % (project,), author, project,
+     description, 'Miscellaneous'),
 ]

@@ -4,35 +4,42 @@ import re
 import setuptools
 
 
-def _read(*names, **kwargs):
+def _read(*paths, **kwargs):
     # Credits: https://packaging.python.org/single_source_version.
     here = os.path.dirname(__file__)
     encoding = kwargs.get('encoding', 'utf8')
-    with io.open(os.path.join(here, *names), encoding=encoding) as fp:
-        return fp.read()
+    with io.open(os.path.join(here, *paths), encoding=encoding) as f:
+        return f.read()
 
 
-def _findVersion(*filePaths):
-    # Credits: https://packaging.python.org/single_source_version.
-    versionFile = _read(*filePaths)
-    versionMatch = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                             versionFile, re.M)
-    if versionMatch:
-        return versionMatch.group(1)
+def _getMetas(*filePaths):
+    data = _read(*filePaths)
+    out = {}
+    metas = ('author', 'contact', 'license', 'summary', 'title', 'url',
+             'version')
+    for meta in metas:
+        pattern = r'^__%s__ = u?[\'"]([^\'"]*)[\'"]' % (meta,)
+        match = re.search(pattern, data, re.MULTILINE)
+        if match is None:
+            raise RuntimeError("Unable to find the metadata '%s'." % (meta,))
 
-    raise RuntimeError("Unable to find the version string.")
+        out[meta] = match.group(1)
 
+    return out
+
+
+_METAS = _getMetas('bana', '__init__.py')
 
 setuptools.setup(
-    name='bana',
-    version=_findVersion('bana', '__init__.py'),
-    description="Set of extensions for Autodesk Maya's Python API",
-    long_description=_read('README.rst'),
+    name=_METAS['title'],
+    version=_METAS['version'],
+    description=_METAS['summary'],
+    url=_METAS['url'],
+    author=_METAS['author'],
+    author_email=_METAS['contact'],
+    license=_METAS['license'],
     keywords='Autodesk Maya gorilla API extensions monkey patch patching revl',
-    license='MIT',
-    url='https://github.com/christophercrouzet/bana',
-    author="Christopher Crouzet",
-    author_email='christopher.crouzet@gmail.com',
+    long_description=_read('README.rst'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
