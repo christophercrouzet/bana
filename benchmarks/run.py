@@ -1,6 +1,7 @@
 #!/usr/bin/env mayapy
 
 import argparse
+import bisect
 import collections
 import os
 import sys
@@ -82,25 +83,26 @@ class BenchRunner(object):
                 elapsed = _clock() - start
                 obj.tearDown()
 
-                elapsed, unit = _convertTimeUnit(elapsed)
-                print("%s (%s.%s) ... %.3f %ss"
+                elapsed, unit = _pickTimeUnit(elapsed)
+                print("%s (%s.%s) ... %.3f %s"
                       % (_getBenchName(obj), type(obj).__module__,
                          type(obj).__name__, elapsed, unit))
 
         return DummyResult()
 
 
-def _convertTimeUnit(value):
-    if not value:
-        return (value, '')
+def _pickTimeUnit(value):
+    bounds = (1e-9, 1e-6, 1e-3)
+    units = 'num'
+    if value >= 1.0:
+        out = (value, 's')
+    elif value <= bounds[0] * 1e-3:
+        out = (0.0, '%ss' % (units[0],))
+    else:
+        i = max(0, bisect.bisect(bounds, value) - 1)
+        out = (value / bounds[i], '%ss' % (units[i],))
 
-    prefixes = 'munpfa'
-    level = 0
-    while value < 1.0 and level < len(prefixes):
-        value *= 1e3
-        level += 1
-
-    return (value, prefixes[level - 1] if level else '')
+    return out
 
 
 def _findBenchs(path, selectors=None):
